@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head th:replace="fragments/head :: head"></head>
+
+    <body>
+
+        <header th:replace="fragments/header-index :: header-index"></header>
+
+        <main>
+            <div class="container my-3">
+                <div class="row d-flex flex-column align-items-center">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 d-flex flex-column align-items-center">
+                        <div th:if="${action}=='update'" class="step text-center">Modificación del perfil</div>
+                        <div th:unless="${action}=='update'" class="step text-center">Registro</div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 d-flex flex-column align-items-center">
+                        <div class="progress d-flex flex-row justify-content-between mt-2">
+                            <div class="step1">
+                                Registro
+                            </div>
+                            <div class="step2">
+                                Perfil
+                            </div>
+                            <div class="step3">
+                                Contacto
+                            </div>
+                        </div>
+                        <form th:action="${action}=='register' ? @{/auth-group/__${action}__} : @{/groups/update}" method="POST" th:object="${group}" autocompleted="off" class="needs-validation" novalidate enctype="multipart/form-data">
+                            <div class="mt-2 container-form">
+
+                                <input type="hidden" th:field="*{id}">
+
+                                <div class="form1">
+                                    <p th:if="${exception}" th:text="${exception}" class="text-danger"></p>
+
+                                    <div>
+                                        <div class="my-3">
+                                            <label th:for="name" class="form-label">Nombre artístico<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" th:field="*{groupName}" id="name" required autofocus>
+                                            <div class="invalid-feedback">El nombre artístico es un campo requerido!</div>
+                                            <p class="alert-group" >Se permite minúsculas, mayúsculas, acentos, números y espacios.</p>
+                                        </div>
+
+                                        <div th:if="${action}=='register'" class="my-3 d-flex flex-column">
+                                            <label th:for="email" class="form-label">Email<span class="text-danger">*</span></label>
+                                            <input type="email" class="form-control" th:field="*{userEmail}" id="email" required>
+                                        </div>
+
+                                        <div th:if="${action}=='register'" class="my-3 d-flex flex-column">
+                                            <label th:for="password" class="form-label">Contraseña<span class="text-danger">*</span></label>
+                                            <input type="password" class="form-control" th:field="*{userPassword}" id="password" required>
+                                            <p class="alert-group" >La contraseña debe contener al menos una minúscula, una mayúscula y un número.
+                                                Mín-4/Max-16</p>
+                                        </div>
+
+                                        <div class="my-3 d-flex flex-column">
+                                            <label th:for="image" class="form-label">Foto de perfil</label>
+                                            <input type="file" accept="image/*" name="image" class="form-control" id="profileImage">
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="mb-2 d-flex flex-row justify-content-end">
+                                            <button type="button" class="next1 text-light">Siguiente</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form2">
+
+                                    <div>
+                                        <div class="my-3">
+                                            <label th:for="type" class="form-label">Música o danza?<span class="text-danger">*</span></label>
+                                            <select class="form-control form-select" th:field="*{groupType}" id="type" aria-label="Select type" required>
+                                                <option th:each="type : ${types}" th:value="${type}" th:text="${type.name}"></option>
+                                            </select>
+                                            <div class="invalid-feedback">El departamento es un campo requerido!</div>
+                                        </div>
+
+                                        <div class="my-3">
+                                            <label th:for="description">Descripción</label>
+                                            <textarea th:field="*{groupDescription}" id="description" class="form-control" aria-label="description"></textarea>
+                                            <div class="invalid-feedback">La descripción es un campo requerido!</div>
+                                        </div>
+
+                                        <div class="my-3">
+                                            <label th:for="locale" class="form-label">Ubicación<span class="text-danger">*</span></label>
+                                            <select class="form-control form-select" th:field="*{groupLocale}" id="locale" aria-label="Select locale" required>
+                                                <option th:each="locale : ${locales}" th:value="${locale}" th:text="${locale.name}"></option>
+                                            </select>
+                                            <div class="invalid-feedback">El departamento es un campo requerido!</div>
+                                        </div>
+
+                                        <div class="my-3 form-group" required >
+                                            <label class="form-label">Disponibilidad para viajar?<span class="text-danger">*</span></label>
+
+                                            <div class="form-check" >
+                                                <input type="radio" class="form-check-input" id="yes" name="groupMobility" value="true" th:field="*{groupMobility}" required>
+                                                <label for="yes" class="form-check-label">Si</label>
+                                            </div>
+
+                                            <div class="form-check" >
+                                                <input type="radio" class="form-check-input" id="not" name="groupMobility" value="false" th:field="*{groupMobility}" requerid>
+                                                <label for="not" class="form-check-label">No</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="my-3">
+                                            <label th:for="style" class="form-label">Estilos<span class="text-danger">*</span></label>
+                                            <select class="form-control form-select" th:field="*{groupStyle}" id="style" aria-label="Select style" required>
+                                                <option th:each="style : ${styles}" th:value="${style}" th:text="${style.name}"></option>
+                                            </select>
+                                            <div class="invalid-feedback">El departamento es un campo requerido!</div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="mb-2 d-flex flex-row justify-content-end">
+                                            <button type="button" class="back1 text-light mx-2">Volver</button>
+                                            <button type="button" class="next2 text-light">Siguiente</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form3">
+
+                                    <div>
+                                        <div class="my-3">
+                                            <label th:for="numberWhatsapp" class="form-label">Número de celular<span class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" th:field="*{contactWhatsAppNumber}" id="numberWhatsapp" required>
+                                            <div class="invalid-feedback">El número de celular es un campo requerido!</div>
+                                            <p class="alert-group" >Debe contener solo números.</p>
+                                        </div>
+
+                                        <div class="my-3">
+                                            <label th:for="facebookUrl" class="form-label">Url Facebook</label>
+                                            <input type="text" class="form-control" th:field="*{contactFacebookUrl}" id="facebookUrl">
+                                        </div>
+
+                                        <div class="my-3">
+                                            <label th:for="instagramUrl" class="form-label">Url Instagram</label>
+                                            <input type="text" class="form-control" th:field="*{contactInstagramUrl}" id="instagramUrl">
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="mb-2 d-flex flex-row justify-content-end">
+                                            <button type="button" class="back2 text-light mx-2">Volver</button>
+                                            <button type="submit" class="save text-light">Guardar</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="my-3 d-flex flex-row justify-content-center" th:if="${action}=='update'">
+                <a type="button" th:href="@{/groups/profile/__${group.id}__}" class="mt-2 text-light">Volver al perfil</button>
+            </div>
+        </main>
+
+        <footer th:replace="fragments/footer :: footer"></footer>
+
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/js/validation.js}"></script>
+        <script th:src="@{/js/search.js}"></script>
+        <script th:src="@{/js/form.js}"></script>
+    </body>
+
+</html>

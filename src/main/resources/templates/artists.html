@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+    <head th:replace="fragments/head-artists :: head-artists"></head>
+
+    <body>
+        <div th:if="${session.id} == null">
+            <header th:replace="fragments/header-index :: header-index"></header>
+        </div>
+
+        <div th:unless="${session.id} == null">
+            <header th:replace="fragments/header-login :: header-login"></header>
+        </div>
+        <main>
+            <div class="container">
+                <div class="row mt-3">
+                    <div class="col">
+                        <div class="title-cards">
+                            <a th:href="@{/groups/music}" class="btn-neon">
+                                <span id="span1"></span>
+                                <span id="span2"></span>
+                                <span id="span3"></span>
+                                <span id="span4"></span>
+                                BANDA MUSICAL
+                            </a>
+                            <a th:href="@{/groups/dance}" class="btn-neon">
+                                <span id="span1"></span>
+                                <span id="span2"></span>
+                                <span id="span3"></span>
+                                <span id="span4"></span>
+                                GRUPO DE DANZA
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${isEmpty}" class="d-flex flex-row justify-content-center">
+                <p th:text="${isEmpty}" class="col-4 alert alert-secondary text-center mb-5"></p>
+            </div>
+
+            <div class="container-card">
+                <div class="container-img" th:each="group : ${groups}">
+                    <a th:href="@{/groups/profile/__${group.groupId}__}">
+                        <img th:src="@{|/uploads/__${group.groupProfileImage}__|}" alt="">
+                        <div class="text">
+                            <h3 class="title text-light" th:text="${group.groupName}"></h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer th:replace="fragments/footer :: footer"></footer>
+
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/search.js}"></script>
+    <script th:src="@{/js/searchFilter.js}"></script>
+
+</body>
+</html>

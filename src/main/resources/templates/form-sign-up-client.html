@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head th:replace="fragments/head :: head"></head>
+
+    <body>
+
+        <header th:replace="fragments/header-index :: header-index"></header>
+
+        <main>
+            <div class="container my-4">
+                <div class="row d-flex flex-column align-items-center">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 d-flex flex-column align-items-center">
+                        <div th:if="${action}=='update'" class="step text-center">Modificación del perfil</div>
+                        <div th:unless="${action}=='update'" class="step text-center">Registro</div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div>
+                            <div class="card mt-2">
+                                <div class="card-body d-flex flex-row justify-content-center">
+                                    <form th:action="${action}=='register' ? @{/auth-client/__${action}__} : @{/clients/update}" method="POST" th:object="${client}"
+
+                                          autocompleted="off" class="needs-validation" novalidate enctype="multipart/form-data">
+
+                                        <input type="hidden" th:field="*{id}">
+
+                                        <p th:if="${exception}" th:text="${exception}" class="text-danger"></p>
+
+                                        <div class="my-3">
+                                            <label th:fo="nickname" class="form-label">Nombre usuario<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" th:field="*{clientNickname}" id="nickname" required autofocus>
+                                            <div class="invalid-feedback">El nombre de usuario es un campo requerido!</div>
+                                            <p class="alert-client" >Se permite minúsculas, mayúsculas, acentos, números, espacios y guiones.</p>
+                                        </div>
+
+                                        <div th:if="${action}=='register'" class="form-group my-3">
+                                            <label th:fo="email" class="form-label">Email<span class="text-danger">*</span></label>
+                                            <input type="email" class="form-control" th:field="*{userEmail}" id="email" required
+                                                   autofocus>
+                                            <div class="invalid-feedback">El email es un campo requerido!</div>
+                                        </div>
+
+                                        <div th:if="${action}=='register'" class="form-group my-3">
+                                            <label th:for="password" class="form-label">Contraseña<span class="text-danger">*</span></label>
+                                            <input type="password" class="form-control" th:field="*{userPassword}" id="password"
+                                                   required>
+                                            <div class="invalid-feedback">La contraseña es un campo requerido!</div>
+                                            <p class="alert-client" >La contraseña debe contener al menos una minúscula, una mayúscula y un número.</p>
+                                        </div>
+
+                                        <div class="my-3 d-flex flex-column">
+                                            <label th:fo="profileImage" class="form-label">Foto de perfil</label>
+                                            <input type="file" accept="image/*" name="image" class="form-control" id="profileImage">
+                                        </div>
+
+                                        <div class="my-3 d-flex flex-row justify-content-end">
+                                            <button type="submit" class="mt-2 save text-light">Guardar</button>
+                                        </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="my-3 d-flex flex-row justify-content-center" th:if="${action}=='update'">
+                        <a type="button" th:href="@{/clients/profile/__${client.id}__}" class="mt-2 text-light">Volver al perfil</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer th:replace="fragments/footer :: footer"></footer>
+
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/js/search.js}"></script>
+        <script th:src="@{/js/validation.js}"></script>
+
+    </body>
+
+</html>

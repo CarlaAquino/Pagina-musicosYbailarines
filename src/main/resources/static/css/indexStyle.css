@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+html { scroll-behavior: smooth; }
+
+/*body{
+    background: #1c1f23 ;
+    font-family: 'Roboto', sans-serif;}*/
+
+.carousel-caption {
+    color: white;
+    position: absolute;
+    margin-top: 20px;
+    margin-bottom: 40vh;
+    background: transparent;
+    border-radius: 20px;
+}
+.carousel-caption h1{
+    font-weight: normal;
+    font-size: 65px;
+    margin-bottom: 30px;
+}
+
+.navbar-transparent{
+    position: absolute;
+    z-index: 100000;
+    width: 100%;
+}
+
+.carousel { height: 100vh;}
+.carousel-inner,.carousel-item { height: 100%;}
+.carousel-item { background-color: rgba(55, 9, 66, 1);}
+.carousel-item img { height: 100%; object-fit: cover; object-position: center; opacity: 30%}
+
+#page-content {flex: 1 0 auto;}
+
+.card-group {
+    object-fit: cover;
+    object-position: center;
+}
+#howitworksClient{
+    background: rgba(0,0,0,.2);
+    border-color: black;
+    border-radius: 20px;
+}
+#howitworksClient h3{
+    text-align: center;
+}
+#howitworksArtist{
+    background: rgba(0,0,0,.2);
+    border-color: black;
+    border-radius: 20px;
+}
+#howitworksArtist h3{
+    text-align: center;
+}
+
+
+#howitworks{
+    background-image: url(../image/bg-card.jpg);
+    background-size: cover;
+    padding-left: 15vh;
+    padding-right: 15vh;
+}
+#howitworks a{
+    color: white;
+}
+
+#howitworks .card {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(58, 60, 161) 0%, rgba(113, 76, 228) 42%, rgba(136, 63, 208) 100%);
+    display: flex;
+    flex: 1;
+    border-radius: 10px;           /* Slightly Curve edges */
+    overflow: hidden;             /* Fixes the corners */
+    margin: 5px;                  /* Add space between cards */
+
+}
+#howitworks .card-header {
+    color: white;
+    text-align: center;
+    font-size: large;
+    font-weight: 600;
+    background-color: transparent;
+    padding: 5px 10px;
+    border: transparent;
+}
+
+#howitworks .card img{
+    height: 200px;
+    width: 200px;
+    padding: 10px;
+}
+
+#howitworks .card-text{
+
+    color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+
+}
+#howitworks .btn-outline-light{
+    padding: 8px;
+    border-radius: 20px;
+}
+.carousel-caption .btn-outline-light{
+    border-radius: 20px;
+}
+
+#howitworks .btn-outline-light:hover{
+    background: #9d0abe;
+}
+
+
+.title-groups{
+    background: rgba(51, 7, 55);
+}
+
+.container-ft{
+    width: 100%;
+    display: flex;
+    background: linear-gradient(30deg, rgba(17, 37, 80) 20%, rgba(51, 7, 55) 50%);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.container-img{
+    width: 45%;
+    height: 350px;
+    margin: 10px;
+    border: 3px solid black;
+    overflow: hidden;
+    position: relative;
+}
+
+img{
+    width: 100%;
+    transition: all .3s;
+}
+
+.container-img:hover img{
+    filter: blur(1px);
+    transform: scale(1.5);
+    transition: all .3s;
+}
+
+.container-img::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transition: all .3s;
+}
+
+.container-img:hover::before{
+    background: rgba(0,0,0,.5);
+    z-index: 2;
+    transition: all .3s;
+}
+
+.text{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title,.paragraph{
+    margin: 10px;
+    padding: 5px;
+}
+
+.title{
+    position: relative;
+    left: 100%;
+}
+
+.container-img:hover .title{
+    left: 0;
+    animation-delay: .3s;
+    transition: all .3s;
+}
+
+.paragraph{
+    position: relative;
+    right: 100%;
+}
+
+.container-img:hover .paragraph{
+    right: 0;
+    animation-delay: .3s;
+    transition: all .3s;
+}
+
+.container-img:hover::after{
+    left: 50%;
+    transition: all .3s;
+}
+
+.alert-client{
+    position: relative;
+    font-size: 10px;
+    left: -5%;
+    top: 47%;
+    top: -10px;
+    line-height: 0.9;
+    padding: 1rem 1rem 0px 1rem;
+    margin: 0px;
+}
+
+.alert-group{
+    position: relative;
+    font-size: 10px;
+    left: -5%;
+    top: 47%;
+    top: -10px;
+    line-height: 0.9;
+    padding: 1rem 1rem 0px 1rem;
+    margin: 0px;
+}
+
+@media screen and (max-width: 750px){
+    .container-ft{
+        width: 100%;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 25px;
+        padding: 5px 0px;
+    }
+}
